@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:dwr="http://www.directwebremoting.org/schema/spring-dwr"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+       http://www.directwebremoting.org/schema/spring-dwr http://www.directwebremoting.org/schema/spring-dwr-2.0.xsd">
+    
+    <bean id="personUpdateAction" class="com.hgweibo.action.PersonUpdateAction" scope="prototype">
+    	<property name="personUpdateService">
+    		<ref bean="personUpdateService"/>
+    	</property>
+    	<property name="friendManagerService">
+    		<ref bean="friendManagerService"/>
+    	</property>
+    	<property name="careService">
+    		<ref bean="careService"/>
+    	</property>
+    	<property name="loginService">
+    		<ref bean="loginService"/>
+    	</property>
+    </bean>
+    
+    <bean id="personUpdateService" class="com.hgweibo.service.impl.PersonUpdateServiceImpl" scope="prototype">
+		<property name="personUpdateDao">
+			<ref bean="personUpdateDao"/>
+		</property>
+	</bean>
+	
+	<bean id="personUpdateDao" class="com.hgweibo.dao.impl.PersonUpdateDaoImpl" scope="prototype">
+		<property name="sqlMapClient">
+			<ref bean="sqlMapClient"/>
+		</property>
+	</bean>
+</beans>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+  	<constant name="struts.enable.DynamicMethodInvocation" value="false" /><!-- 属性设置Struts 2是否支持动态方法调用，该属性的默认值是true -->
+	<constant name="struts.devMode" value="true" /><!-- 可以在应用出错时显示更多、更友好的出错提示 -->
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+	<constant name="struts.serve.static.browserCache" value="false" />
+	<constant name="struts.configuration.xml.reload" value="true" />
+	<constant name="struts.objectFactory" value="org.apache.struts2.spring.StrutsSpringObjectFactory" /><!-- struts2的action对象交给spring来创建实例 -->
+    
+    <include file="struts/struts-loginManage.xml"/>
+    <include file="struts/struts-registerManage.xml"></include>
+    <include file="struts/struts-personManage.xml"></include>
+    <include file="struts/struts-careManage.xml"></include>
+    <include file="struts/struts-messageManage.xml"></include>
+    <include file="struts/struts-searchManage.xml"></include>
+</struts>

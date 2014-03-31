@@ -1,0 +1,10 @@
+<!DOCTYPE xwork PUBLIC "-//OpenSymphony Group//XWork 1.0//EN" "http://www.opensymphony.com/xwork/xwork-1.0.dtd">
+<xwork>
+    
+    <package name="searchManage" namespace="/search" extends="struts-default">
+		<action name="searchAction" class="searchAction" method="search" >
+		<result name="success">/page/search.jsp</result>
+		<result name="fail">/page/error.jsp</result>
+		</action>
+	</package>
+</xwork>

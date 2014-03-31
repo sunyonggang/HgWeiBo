@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap>
+	<typeAlias alias="care" type="com.hgweibo.model.Care"/>
+	
+	<insert id="addCare" parameterClass="care">
+		insert into care (usersId,careUserId)
+		values(#usersId#,#careUserId#)
+	</insert>
+	
+	<select id="checkCare" parameterClass="care" resultClass="care">
+		SELECT *
+		FROM care 
+		WHERE usersId = #usersId# and careUserId = #careUserId#
+	</select>
+	
+	<select id="checkReCare" parameterClass="care" resultClass="care">
+		SELECT *
+		FROM care 
+		WHERE usersId = #careUserId# and careUserId = #usersId#
+	</select>
+	
+ </sqlMap>

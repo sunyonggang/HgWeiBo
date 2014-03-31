@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap>
+	<typeAlias alias="user" type="com.hgweibo.model.User"/>
+	<typeAlias alias="pages" type="com.hgweibo.model.PageList"/>
+	<typeAlias alias="caretofriend" type="com.hgweibo.model.Care"/>
+	<typeAlias alias="friendtocare" type="com.hgweibo.model.FriendManager"/>
+	
+	<select id="cffind" parameterClass="caretofriend" resultClass="user">
+		SELECT *
+		FROM users 
+		WHERE usersId = #usersId#
+	</select>
+	
+	<select id="cfrfind" parameterClass="caretofriend" resultClass="user">
+		SELECT *
+		FROM users 
+		WHERE usersId = #careUserId#
+	</select>
+	
+	
+	<insert id="addUser" parameterClass="user">
+		insert into users(userName,password,email,qq,nick,sex) 
+			values(#userName#,#password#,#email#,#qq#,#nick#,#sex#)
+	</insert>
+
+
+	<delete id="deleteUser" parameterClass="user">
+		delete from user
+		where userName=#userName# 
+	</delete>
+	
+	
+	<select id="findUser" parameterClass="user" resultClass="user">
+		SELECT *
+		FROM users 
+		WHERE userName = #userName# and password=#password#
+	</select>
+	
+	<select id="checkUser" parameterClass="user" resultClass="user">
+		select *
+		from users
+		where userName = #userName#
+	</select>
+	
+	<select id="hotCare" parameterClass="pages" resultClass="user">
+		SELECT * FROM(
+    			SELECT TOP 5 * FROM(
+       					 SELECT TOP 15 * FROM users ORDER BY careCount DESC) 
+            AS TEMP1 ORDER BY careCount DESC)
+        AS TEMP2 ORDER BY careCount DESC
+	</select>
+	
+	<select id="searchUsers" parameterClass="String" resultClass="user">
+		select * 
+		from users
+		where userName like '%'+#name#+'%'
+	</select>
+
+	<update id="updateUser" parameterClass="user">
+	<![CDATA[
+		update users set 
+		    userName = #userName#,
+		    password=#password#,
+		    nick=#nick#,
+		    trueName=#trueName#,
+		    birthPlace=#birthPlace#,
+		    sex=#sex#,
+		    bloodType=#bloodType#,
+		    email=#email#,
+		    qq=#qq#,
+		    education=#education#,
+		    major=#major#,
+		    school=#school#,
+		    company=#company#,
+		    job=#job#,
+		    personalInstruction=#personalInstruction#,
+		    emotion=#emotion#
+		where usersId=#usersId#
+	]]>
+	</update>
+	
+	<update id="carecountupdateUser" parameterClass="user">
+	<![CDATA[
+		update users set 
+		    userName = #userName#,
+		    password=#password#,
+		    nick=#nick#,
+		    trueName=#trueName#,
+		    birthPlace=#birthPlace#,
+		    sex=#sex#,
+		    bloodType=#bloodType#,
+		    email=#email#,
+		    qq=#qq#,
+		    education=#education#,
+		    major=#major#,
+		    school=#school#,
+		    company=#company#,
+		    job=#job#,
+		    personalInstruction=#personalInstruction#,
+		    emotion=#emotion#,
+		    careCount=#careCount#
+		where usersId=#usersId#
+	]]>
+	</update>
+	
+ </sqlMap>

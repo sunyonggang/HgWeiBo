@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap>
+	<typeAlias alias="weibo" type="com.hgweibo.model.Weibo"/>
+	<typeAlias alias="weiboShow" type="com.hgweibo.model.WeiboShow"/>
+	
+	<select id="findWeibo1" parameterClass="java.lang.String" resultClass="weibo">
+         SELECT  weiboId,
+	             usersId,
+	             contents,
+                 theme,
+	             forewardCount,
+	             comentCount,
+	             publishDate
+	      FROM weibo
+	      WHERE theme like '%'+#name#+'%'
+    </select>
+	
+	<insert id="addWeibo" parameterClass="weibo">
+		insert into weibo(theme,contents,publishDate,usersId)
+		      values(#theme#,#contents#,getdate(),#usersId#)
+	
+	</insert>
+	<select id="findWeibos" parameterClass="user" resultClass="weiboShow">
+		select w.weiboId weiboId,w.theme theme,w.contents contents,w.publishDate publishDate,
+		       w.forewardCount forewardCount,w.comentCount comentCount,u.userName userName
+		from   weibo w,users u
+		where  w.usersId=u.usersId and w.usersId in(
+					       select careUserId
+					       from   care
+					       where  usersId=#usersId#
+			   )
+		order by w.publishDate desc
+	</select>
+	
+	<insert id="addComment" parameterClass="weibo">
+	   insert into comment(weiboId,commentContent,usersId,commentDate)
+              values(#weiboId#,#commentContent#,#usersId#,getdate())	
+	</insert>
+	
+	<update id="updateCommentCount" parameterClass="weibo">
+	 <![CDATA[
+	   update weibo
+	     set
+	     comentCount=#comentCount#,
+	      usersId=#usersId#,
+	             contents=#contents#,
+                 theme=#theme#,
+	             forewardCount=#forewardCount#,
+	             publishDate=#publishDate#
+	     where weiboId =#weiboId#
+	]]>
+	</update>
+	
+	
+	<insert id="addRefend" parameterClass="weibo">
+	<![CDATA[
+	    insert into weiboResend(usersId,weiboId,resendDate)
+	     values(#usersId#,#weiboId#,getdate())
+	     
+	]]>
+	
+	
+	
+	</insert>
+	
+	<select id="findWeiboById" parameterClass="weibo" resultClass="weibo">
+	   select *
+	   from weibo
+	   where weiboId=#weiboId#
+	
+	</select>
+	
+	<update id="updateRefendCount" parameterClass="weibo">
+	 <![CDATA[
+	   update weibo
+	     set
+	             forewardCount=#forewardCount#
+	     where weiboId =#weiboId#
+	]]>
+	</update>
+	
+ </sqlMap>

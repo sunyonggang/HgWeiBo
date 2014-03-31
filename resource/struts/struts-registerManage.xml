@@ -1,0 +1,12 @@
+<!DOCTYPE xwork PUBLIC "-//OpenSymphony Group//XWork 1.0//EN" "http://www.opensymphony.com/xwork/xwork-1.0.dtd">
+<xwork>
+    
+    <package name="registerManage" namespace="/register" extends="struts-default">
+		<action name="registerAction" class="registerAction" method="register" >
+			<result name="success">/page/login.jsp</result>
+			<result name="fail">/page/register.jsp</result>
+		</action>
+		<action name="checkUserIsOk" class="registerAction" method="checkUser">
+		</action>
+	</package>
+</xwork>

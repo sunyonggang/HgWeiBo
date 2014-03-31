@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:dwr="http://www.directwebremoting.org/schema/spring-dwr"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+       http://www.directwebremoting.org/schema/spring-dwr http://www.directwebremoting.org/schema/spring-dwr-2.0.xsd">
+    
+    <bean id="messageAction" class="com.hgweibo.action.MessageAction" scope="prototype">
+    	<property name="messageService">
+    		<ref bean="messageService"/>
+    	</property>
+    </bean>
+    
+     <bean id = "searchMessageAction" class = "com.hgweibo.action.SearchMessageAction" scope = "prototype">
+    	<property name="messageService">
+    		<ref bean = "messageService"/>
+    	</property>
+    </bean>
+    
+    <bean id="messageService" class="com.hgweibo.service.impl.MessageServiceImpl" scope="prototype">
+		<property name="messageDao">
+			<ref bean="messageDao"/>
+		</property>
+	</bean>
+	
+	<bean id="messageDao" class="com.hgweibo.dao.impl.MessageDaoImpl" scope="prototype">
+		<property name="sqlMapClient">
+			<ref bean="sqlMapClient"/>
+		</property>
+	</bean>
+</beans>

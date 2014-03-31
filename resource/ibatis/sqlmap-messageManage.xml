@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap>
+	<typeAlias alias="message" type="com.hgweibo.model.Message"/>
+	
+	<insert id="addMessage" parameterClass="message">
+		insert into Message(usersId,receivedUserid,info,sendDate) 
+			values(#usersId#,#receivedUserid#,#info#,getdate())
+	</insert>
+	
+	<select id="findMessage" parameterClass="message" resultClass="message">
+		SELECT usersId,
+			   receivedUserid,
+			   info,
+			   sendDate
+		FROM Message 
+		WHERE receivedUserid = #receivedUserid#
+	</select>
+
+	
+ </sqlMap>

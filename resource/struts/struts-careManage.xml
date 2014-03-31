@@ -1,0 +1,8 @@
+<!DOCTYPE xwork PUBLIC "-//OpenSymphony Group//XWork 1.0//EN" "http://www.opensymphony.com/xwork/xwork-1.0.dtd">
+<xwork>
+    
+    <package name="careManage" namespace="/care" extends="struts-default">
+		<action name="careAction" class="careAction" method="care" >
+		</action>
+	</package>
+</xwork>

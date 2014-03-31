@@ -1,0 +1,11 @@
+<!DOCTYPE xwork PUBLIC "-//OpenSymphony Group//XWork 1.0//EN" "http://www.opensymphony.com/xwork/xwork-1.0.dtd">
+<xwork>
+    
+    <package name="weiboManage" namespace="/weibo" extends="struts-default">
+		<action name="weiboPublishAction" class="weiboPublishAction" method="publishWeibo" >
+		</action>
+		
+	 	<action name="submitCommentAction" class="weiboPublishAction" method="submitComment"></action>
+	 	<action name="submitRefendAction" class="weiboPublishAction" method="submitRefend"></action>
+	</package>
+</xwork>
